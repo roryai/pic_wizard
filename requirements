@@ -1,0 +1,8 @@
+sorts heic, jpg files by month taken in 'Pictures' folder
+sorts .mov files by month taken in 'Movies' folder
+png, mp4 files to 'Screen shots and recordings' folder
+
+read file names
+file name iterate over array
+move each file to appropriate destination, creating dir if not exists
+enter log line for each file moved
