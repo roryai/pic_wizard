@@ -78,7 +78,7 @@ class PicWizard
 
   def get_month(time)
     a = self.months[time.month]
-    puts a
+    puts a # delete this rrrrrrrrrrrrrrrrrrrrrrrr
     a
   end
 

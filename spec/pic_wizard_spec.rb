@@ -22,22 +22,22 @@ describe PicWizard do
 
     it 'can find HEIC files' do
       subject.collect_file_names
-      expect(subject.files[0]).to eql('sample_files/IMG_0603.HEIC')
+      expect(subject.files[0]).to eql('IMG_0603.HEIC')
     end
 
     it 'can find all relevant file types, excludes irrelevant file types' do
-      expect(subject.files.include?('sample_files/IMG_0603.HEIC')).to be false
-      expect(subject.files.include?('sample_files/IMG_0965.PNG')).to be false
-      expect(subject.files.include?('sample_files/IMG_0969.mov')).to be false
-      expect(subject.files.include?('sample_files/ScreenRecording.mp4')).to be false
-      expect(subject.files.include?('sample_files/camphoto_341603450 (2).jpg')).to be false
+      expect(subject.files.include?('IMG_0603.HEIC')).to be false
+      expect(subject.files.include?('IMG_0965.PNG')).to be false
+      expect(subject.files.include?('IMG_0969.mov')).to be false
+      expect(subject.files.include?('ScreenRecording.mp4')).to be false
+      expect(subject.files.include?('camphoto_341603450 (2).jpg')).to be false
       subject.collect_file_names
-      expect(subject.files.include?('sample_files/IMG_0603.HEIC')).to be true
-      expect(subject.files.include?('sample_files/IMG_0965.PNG')).to be true
-      expect(subject.files.include?('sample_files/IMG_0969.mov')).to be true
-      expect(subject.files.include?('sample_files/ScreenRecording.mp4')).to be true
-      expect(subject.files.include?('sample_files/camphoto_341603450 (2).jpg')).to be true
-      expect(subject.files.include?('sample_files/no_copy.txt')).to be false
+      expect(subject.files.include?('IMG_0603.HEIC')).to be true
+      expect(subject.files.include?('IMG_0965.PNG')).to be true
+      expect(subject.files.include?('IMG_0969.mov')).to be true
+      expect(subject.files.include?('ScreenRecording.mp4')).to be true
+      expect(subject.files.include?('camphoto_341603450 (2).jpg')).to be true
+      expect(subject.files.include?('no_copy.txt')).to be false
     end
   end
 
@@ -93,7 +93,12 @@ describe PicWizard do
   describe '.process' do
 
     it 'creates all directories and copies all files' do
-
+      subject.collect_file_names
+      subject.files.each do |f|
+        path = subject.source + '/' + f
+        atime = File.atime(path)
+        puts File.utime(atime, atime, path)
+      end
     end
   end
 
