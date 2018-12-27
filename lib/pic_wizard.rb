@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'exif'
 
 class PicWizard
 
@@ -34,6 +35,25 @@ class PicWizard
     end
     puts self.log
     puts self.copy_count
+  end
+
+  def test_output
+    collect_file_names
+    self.files.each do |file_name|
+      source = self.source + '/' + file_name
+      # begin
+        # data = Exif::Data.new(File.open(source))
+        puts 'File name: ' + file_name
+        puts 'Ctime: ' + get_ctime(source).to_s
+        puts 'Birthtime: ' + File.birthtime(source).to_s
+        puts
+        # puts 'Exif time: ' + data.date_time
+        # puts data
+        # puts 'Utime: ' + get_utime(self.source + '/' + file_name).to_s
+      # rescue
+      # end
+
+    end
   end
 
   def collect_file_names
@@ -76,6 +96,11 @@ class PicWizard
     File.ctime(file_path)
   end
 
+  def get_utime(file_path)
+    # perhaps use .utime here
+    File.utime(file_path)
+  end
+
   def get_month(time)
     a = self.months[time.month]
     puts a # delete this rrrrrrrrrrrrrrrrrrrrrrrr
@@ -100,5 +125,6 @@ class PicWizard
   end
 
 end
+puts 'running'
 wiz = PicWizard.new
-wiz.process
+wiz.test_output
